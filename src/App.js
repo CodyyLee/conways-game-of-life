@@ -58,6 +58,7 @@ function App() {
       }
 
       window.grid = temp;
+      console.log(window.grid)
       render();
     }
   }
@@ -65,17 +66,23 @@ function App() {
   //see how many neighbors each cell has and if it is alive, check if it has 2 or 3 neighbors
   //else if it's dead, check to see if it has 3 neighbors
   const simulation = () => {
+    let copy = window.grid.map(item => {
+      return [...item]
+    })
+
+    console.log(copy)
     let neighbors;
     for(let i = 0; i < w; i++) {
       for(let j = 0; j < h; j++) {
         //call getNeighbors on each cell
         neighbors = getNeighbors(i,j);
-        window.grid[i][j] = (window.grid[i][j]) ?
+        copy[i][j] = (window.grid[i][j]) ?
           neighbors == 2 || neighbors == 3 :
           neighbors == 3;
       }
     }
 
+    window.grid = copy;
     setGen(generation += 1)
     render();
   }
