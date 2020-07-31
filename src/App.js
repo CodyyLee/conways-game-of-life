@@ -195,7 +195,6 @@ function App() {
         window.grid[24][18] = 1;
         render();
         break;
-        break;
       default:
         break;
     }
@@ -234,6 +233,12 @@ function App() {
         <button onClick={load} id='1'>Preset 1</button>
         <button onClick={load} id='2'>Preset 2</button>
         <button onClick={load} id='3'>Preset 3</button>
+
+
+        <h3>RULES</h3>
+        <p>Any live cell with two or three live neighbours survives.</p>
+        <p>Any dead cell with three live neighbours becomes a live cell.</p>
+        <p>All other live cells die in the next generation. Similarly, all other dead cells stay dead.</p>
     </div>
   );
 }
