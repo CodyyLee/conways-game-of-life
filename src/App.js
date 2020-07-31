@@ -5,6 +5,7 @@ function App() {
   let h = 25;
   let grid = new Array(w);
   let generation = 0;
+  let speed = 1000;
 
   let timer;
 
@@ -16,7 +17,7 @@ function App() {
   //otherwise, get rid of the interval
   useEffect(() => {
     if(running && rando !== 1 && window.grid.length !== 0) {
-      window.timer = setInterval(simulation, 1000);
+      window.timer = setInterval(simulation, window.speed);
     } else {
       clearInterval(window.timer);
     }
@@ -36,7 +37,7 @@ function App() {
       }
     }
 
-    window.timer = setInterval(simulation, 100);
+    window.timer = setInterval(simulation, window.speed);
   }
 
   //toggle selected cell between dead and alive(0 or 1)
@@ -151,6 +152,47 @@ function App() {
     
     render();
   }
+
+  const load = e => {
+    switch(e.target.id) {
+      case "1":
+        clear();
+        window.grid[0][0] = 1;
+        window.grid[0][1] = 1;
+        window.grid[2][1] = 1;
+        window.grid[5][0] = 1;
+        window.grid[0][9] = 1;
+        window.grid[18][0] = 1;
+        window.grid[20][0] = 1;
+        render();
+        break;
+      case "2":
+        clear();
+        window.grid[0][1] = 1;
+        window.grid[1][1] = 1;
+        window.grid[2][2] = 1;
+        window.grid[8][2] = 1;
+        window.grid[3][14] = 1;
+        window.grid[22][5] = 1;
+        window.grid[23][8] = 1;
+        render();
+        break;
+      case "3":
+        clear();
+        window.grid[8][3] = 1;
+        window.grid[5][22] = 1;
+        window.grid[20][17] = 1;
+        window.grid[12][13] = 1;
+        window.grid[8][19] = 1;
+        window.grid[23][8] = 1;
+        window.grid[24][18] = 1;
+        render();
+        break;
+        break;
+      default:
+        break;
+    }
+  }
   
   return (
     <div className="App">
@@ -176,9 +218,15 @@ function App() {
           random();
         }}>RANDOM</button>
 
-        <button id='1'>Preset 1</button>
-        <button id='2'>Preset 2</button>
-        <button id='3'>Preset 3</button>
+        <input id="speed" type="text"></input>
+        <button onClick={() => {
+          let num = document.getElementById('speed');
+          window.speed = num.value;
+        }}>Apply</button>
+
+        <button onClick={load} id='1'>Preset 1</button>
+        <button onClick={load} id='2'>Preset 2</button>
+        <button onClick={load} id='3'>Preset 3</button>
     </div>
   );
 }
